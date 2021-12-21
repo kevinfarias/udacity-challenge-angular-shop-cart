@@ -1,0 +1,16 @@
+<div class="detail-container">
+    <img src="{{ product.url }}" alt="Image photo">
+    <div class="detail-item">
+        <h1>{{ product.name }}</h1>
+        <h4>${{ product.price }}</h4>
+        <p>{{ product.description }}</p>
+        <select class="select-input" [(ngModel)]="product.amount">
+            <option *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">{{ i }}</option>
+        </select>
+        <br />
+        <button class="button" (click)="addToCart(product)">Add to cart</button>
+        <br/>
+        <br/>
+        <a routerLink="/" class="back-link">Back to products list</a>
+    </div>
+</div>

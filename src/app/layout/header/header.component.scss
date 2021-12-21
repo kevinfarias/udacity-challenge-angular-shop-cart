@@ -1,0 +1,32 @@
+.header {
+  text-align: center;
+  background: #33b5e5;
+  color: #fff;
+  padding: 12px;
+  h1 {
+    margin: 10px 0px;
+  }
+}
+
+a {
+  color: #ffffff;
+}
+
+ul {
+  list-style: none;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  font-weight: bold;
+  li {
+    display: inline-block;
+    margin-right: 10px;
+    a {
+      text-decoration: none;
+      transition: all 0.2s linear 0.1s;
+      &:hover {
+        color: darken(#33b5e5, 20%);
+      }
+    }
+  }
+}

@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  padding: 0px !important;
+  margin: 0px !important;
+  font-family: "Verdana", Courier, monospace;
+}
+
+.button {
+  background-color: #33b5e5;
+  color: #fff;
+  border-width: 0px;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: darken(#33b5e5, 30%);
+  }
+}
+
+*:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}

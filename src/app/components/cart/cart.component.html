@@ -1,0 +1,36 @@
+<div class='cart-container'>
+    <div class="empty-cart-message" *ngIf="productsOnCart.length === 0">You don't have any products in the cart! Try to navigate back to products page and add some content to the cart. <a routerLink="/">Go back to products</a></div>
+    <ul class="cart-item">
+        <li class="cart-item-details" *ngFor="let product of productsOnCart">
+            <div style="width: 50%;display: inline-block;">
+                <img src="{{ product.url }}" alt="">
+            </div>
+            <div class="displayInformation" style="width:50%; display: inline-block;">
+                <h3><b>{{ product.name }}</b></h3>
+                <span>${{ product.price }}</span>
+                <br/>
+                <p>
+                    <span>Amount:</span> <input type="integer" size="10"  #amount (ngModelChange)="(!(+amount.value) ? removeFromCart(product) : undefined)" [(ngModel)]="product.amount" value="{{ product.amount }}" />
+                </p>
+            </div>
+        </li>
+        <li class="cart-item-details" style="text-align: center;width:100%">
+            <b>Total: ${{ getTotal() }}</b>
+        </li>
+    </ul>
+    <form #form="ngForm" (ngSubmit)="submitForm()" class="cart-panel">
+        <div>
+            <label for="fullname">Full name</label>
+            <input type="text" name="fullname" [(ngModel)]="fullname" required minlength="3" placeholder="Minimum 3 characters" />
+        </div>
+        <div>
+            <label for="address">Address</label>
+            <input type="text" name="address" [(ngModel)]="address" required minlength="5" placeholder="Minimum 6 characters" />
+        </div>
+        <div>
+            <label for="cardnumber">Card number</label>
+            <input type="text" name="cardnumber" (keypress)="($event.charCode >= 48 && $event.charCode < 58)" [(ngModel)]="cardnumber" required minlength="16" maxlength="16" placeholder="16 digit number" />
+        </div>
+        <button type="submit" class="button" [disabled]="form.invalid">Submit</button>
+    </form>
+</div>

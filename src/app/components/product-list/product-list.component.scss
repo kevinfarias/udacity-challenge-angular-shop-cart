@@ -1,0 +1,15 @@
+.product-index {
+  max-width: 100%;
+  min-width: 100%;
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.product-container {
+  text-align: center;
+  display: inline-block;
+  max-width: 80%;
+  > div {
+    display: inline-block;
+  }
+}
