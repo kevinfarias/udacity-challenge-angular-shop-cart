@@ -17,6 +17,9 @@ export class CartService {
   addProduct(row: Product): Product[] {
     /* remove first, this way never will be duplicated */
     this.removeProduct(row);
+    if (!row.amount || Number(row.amount) === 0) {
+      throw new Error('You must pass a valid amount!');
+    }
     this.products.push(row);
 
     return this.products;
@@ -39,6 +42,11 @@ export class CartService {
         this.products[i] = row;
       }
     }
+    return this.products;
+  }
+
+  clean(): Product[] {
+    this.products.splice(0, this.products.length);
     return this.products;
   }
 }

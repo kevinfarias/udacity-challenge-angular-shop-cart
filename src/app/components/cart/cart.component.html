@@ -1,5 +1,6 @@
-<div class='cart-container'>
-    <div class="empty-cart-message" *ngIf="productsOnCart.length === 0">You don't have any products in the cart! Try to navigate back to products page and add some content to the cart. <a routerLink="/">Go back to products</a></div>
+<div class="empty-cart-message" *ngIf="productsOnCart.length === 0">You don't have any products in the cart! Try to
+    navigate back to products page and add some content to the cart. <a routerLink="/">Go back to products</a></div>
+<div class='cart-container' *ngIf="productsOnCart.length > 0">
     <ul class="cart-item">
         <li class="cart-item-details" *ngFor="let product of productsOnCart">
             <div style="width: 50%;display: inline-block;">
@@ -21,15 +22,39 @@
     <form #form="ngForm" (ngSubmit)="submitForm()" class="cart-panel">
         <div>
             <label for="fullname">Full name</label>
-            <input type="text" name="fullname" [(ngModel)]="fullname" required minlength="3" placeholder="Minimum 3 characters" />
+            <input type="text" name="fullname" [(ngModel)]="fullname" required minlength="3" placeholder="Minimum 3 characters" #fullnameValidator="ngModel" />
+            <div *ngIf="fullnameValidator.invalid && fullnameValidator.dirty">
+                <div *ngIf="fullnameValidator.errors?.['required']">
+                    Please provide your fullname.
+                </div>
+                <div *ngIf="fullnameValidator.errors?.['minlength']">
+                    Your fullname must contain at least 3 characters. Actual: {{ fullname.length }} character(s).
+                </div>
+            </div>
         </div>
         <div>
             <label for="address">Address</label>
-            <input type="text" name="address" [(ngModel)]="address" required minlength="5" placeholder="Minimum 6 characters" />
+            <input type="text" name="address" [(ngModel)]="address" required minlength="6" placeholder="Minimum 6 characters" #addressValidator="ngModel" />
+            <div *ngIf="addressValidator.invalid && addressValidator.dirty">
+                <div *ngIf="addressValidator.errors?.['required']">
+                    Please provide your address.
+                </div>
+                <div *ngIf="addressValidator.errors?.['minlength']">
+                    Your address must contain at least 6 characters. Actual: {{ address.length }} character(s).
+                </div>
+            </div>
         </div>
         <div>
             <label for="cardnumber">Card number</label>
-            <input type="text" name="cardnumber" (keypress)="($event.charCode >= 48 && $event.charCode < 58)" [(ngModel)]="cardnumber" required minlength="16" maxlength="16" placeholder="16 digit number" />
+            <input type="text" name="cardnumber" (keypress)="($event.charCode >= 48 && $event.charCode < 58)" [(ngModel)]="cardnumber" required minlength="16" maxlength="16" placeholder="16 digit number" #cardnumberValidator="ngModel" />
+            <div *ngIf="cardnumberValidator.invalid && cardnumberValidator.dirty">
+                <div *ngIf="cardnumberValidator.errors?.['required']">
+                    Please provide your cardnumber.
+                </div>
+                <div *ngIf="cardnumberValidator.errors?.['minlength']">
+                    Your cardnumber must contain 16 characters. Actual: {{ ('' + cardnumber).length }} character(s).
+                </div>
+            </div>
         </div>
         <button type="submit" class="button" [disabled]="form.invalid">Submit</button>
     </form>

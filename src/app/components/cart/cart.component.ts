@@ -23,7 +23,12 @@ export class CartComponent implements OnInit {
   }
 
   removeFromCart(row: Product): void {
-    this.cartService.removeProduct(row);
+    try {
+      this.cartService.removeProduct(row);
+      alert('Removed with success!');
+    } catch (e: any) {
+      alert(`Error removing from cart: ${e}`);
+    }
   }
 
   changeProduct(row: Product): void {
@@ -41,10 +46,13 @@ export class CartComponent implements OnInit {
   }
 
   submitForm(): void {
+    const totalAmount = this.getTotal();
+
+    this.cartService.clean();
     this.router.navigateByUrl('/confirmation', {
       state: {
         fullname: this.fullname,
-        totalAmount: this.getTotal(),
+        totalAmount,
       },
     });
     this.fullname = '';

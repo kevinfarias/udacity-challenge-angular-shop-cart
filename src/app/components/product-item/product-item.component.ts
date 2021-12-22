@@ -22,8 +22,12 @@ export class ProductItemComponent implements OnInit {
   ngOnInit(): void {}
 
   addToCart(row: Product): void {
-    this.cartsService.addProduct(row);
-    alert(`Added to cart with success!`);
+    try {
+      this.cartsService.addProduct(row);
+      alert(`Added to cart with success!`);
+    } catch (e: any) {
+      alert(`Error adding to cart: ${e}`);
+    }
   }
 
   removeFromCart(row: Product): void {
